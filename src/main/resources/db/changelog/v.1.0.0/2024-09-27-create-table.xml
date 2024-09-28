@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <changeSet id="2024-09-27-create-table-players" author="OlegTihii">
+        <createTable tableName="Players">
+            <column name="ID" type="int" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="Name" type="varchar(64)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2024-09-27-create-table-matches" author="OlegTihii">
+        <createTable tableName="Matches">
+            <column name="ID" type="int" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="Player1" type="int">
+                <constraints foreignKeyName="Matches_Player1_Players_ID" references="Players(ID)"/>
+            </column>
+            <column name="Player2" type="int">
+                <constraints foreignKeyName="Matches_Player2_Players_ID" references="Players(ID)"/>
+            </column>
+            <column name="Winner" type="int">
+                <constraints foreignKeyName="Matches_Winner_Players_ID" references="Players(ID)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
