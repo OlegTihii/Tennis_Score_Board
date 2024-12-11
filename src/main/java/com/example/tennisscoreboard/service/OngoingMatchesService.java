@@ -3,6 +3,7 @@ package com.example.tennisscoreboard.service;
 import com.example.tennisscoreboard.dto.MatchDto;
 import com.example.tennisscoreboard.dto.PlayerDto;
 import com.example.tennisscoreboard.entity.Player;
+import com.example.tennisscoreboard.exception.MatchAlreadyInProgressException;
 import com.example.tennisscoreboard.mapper.PlayerMapper;
 
 import java.util.Map;
@@ -12,6 +13,11 @@ import java.util.concurrent.ConcurrentHashMap;
 public class OngoingMatchesService {
     private static final Map<UUID, MatchDto> allGoingMatches = new ConcurrentHashMap<>();
     private final PlayerPersistenceService playerPersistenceService = new PlayerPersistenceService();
+    private final FinishedMatchesPersistenceService finishedMatchesPersistenceService = new FinishedMatchesPersistenceService();
+
+    public MatchDto findById(UUID uuid) {
+        return allGoingMatches.get(uuid);
+    }
 
     public UUID createMatch(PlayerDto playerOneDto, PlayerDto playerTwoDto) {
         // Проверка есть ли игроки в бд и добавление
@@ -25,10 +31,27 @@ public class OngoingMatchesService {
                 .playerTwo(PlayerMapper.INSTANCE.playerToPlayerMatchDto(playerTwo))
                 .build();
 
+        if (allGoingMatches.containsValue(matchDto)) {
+            throw new MatchAlreadyInProgressException("The match between the players [" + playerOneDto.getName()
+                    + "] and [" + playerTwoDto.getName() + "] has already started");
+        }
+
         allGoingMatches.put(uuid, matchDto);
 
         return uuid;
     }
 
+    public boolean checkIsMatchOver(UUID uuid, MatchDto matchDto) {
+        if (matchDto.getPlayerOne().getSets() == 2 ||
+                matchDto.getPlayerTwo().getSets() == 2) {
+            finishedMatchesPersistenceService.save(matchDto);
+            removeFromGoingMatches(uuid);
 
+            return true;
+        }
+        return false;
+    }
+    private void removeFromGoingMatches(UUID uuid) {
+        allGoingMatches.remove(uuid);
+    }
 }

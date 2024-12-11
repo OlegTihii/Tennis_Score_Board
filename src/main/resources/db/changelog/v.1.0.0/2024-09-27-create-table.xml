@@ -30,4 +30,43 @@
         </createTable>
     </changeSet>
 
+    <changeSet id="2024-11-25-change-table-players" author="OlegTihii">
+        <modifyDataType
+                tableName="Players"
+                columnName="id"
+                newDataType="BIGINT" />
+    </changeSet>
+
+    <changeSet id="2024-11-25-change-table-matches" author="OlegTihii">
+        <modifyDataType
+                tableName="Matches"
+                columnName="id"
+                newDataType="BIGINT" />
+    </changeSet>
+
+    <changeSet id="2024-11-25-v2-change-table-players" author="OlegTihii">
+        <modifyDataType
+                tableName="Players"
+                columnName="ID"
+                newDataType="BIGINT" />
+    </changeSet>
+
+    <changeSet id="2024-11-25-add-auto-increment" author="OlegTihii">
+        <modifyDataType tableName="Players" columnName="ID" newDataType="BIGINT AUTO_INCREMENT"/>
+    </changeSet>
+
+    <changeSet id="2024-11-25-change-table-matcher" author="OlegTihii">
+        <modifyDataType tableName="Matches" columnName="PLAYER1" newDataType="BIGINT"/>
+        <modifyDataType tableName="Matches" columnName="PLAYER2" newDataType="BIGINT"/>
+        <modifyDataType tableName="Matches" columnName="WINNER" newDataType="BIGINT"/>
+
+    </changeSet>
+
+    <changeSet id="2024-11-25-add-auto-increment-v2" author="OlegTihii">
+        <addAutoIncrement
+                tableName="PLAYERS"
+                columnName="ID"
+                columnDataType="BIGINT"/>
+    </changeSet>
+
 </databaseChangeLog>

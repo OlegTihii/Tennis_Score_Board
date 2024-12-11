@@ -16,9 +16,8 @@
         <property name="hibernate.dialect">org.hibernate.dialect.H2Dialect</property>
 
 
-        <!--        <mapping class="com.example.tennisscoreboard.entity.Player"/>-->
-        <!-- другие сущности -->
-
+        <mapping class="com.example.tennisscoreboard.entity.Player"/>
+        <mapping class="com.example.tennisscoreboard.entity.Match"/>
 
     </session-factory>
 </hibernate-configuration>

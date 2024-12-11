@@ -12,10 +12,10 @@ public class PlayerRepository extends BaseRepository<Player, Long> {
     }
 
     public Optional<Player> findByName(String name) {
+
         try (Session session = sessionFactory.openSession()) {
             return session.createQuery("SELECT p FROM Player p WHERE p.name = :name", Player.class)
                     .setParameter("name", name).uniqueResultOptional();
         }
-
     }
 }
