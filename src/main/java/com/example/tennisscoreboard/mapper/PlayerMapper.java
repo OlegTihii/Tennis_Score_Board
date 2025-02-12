@@ -12,9 +12,8 @@ public interface PlayerMapper {
 
     PlayerMapper INSTANCE = Mappers.getMapper(PlayerMapper.class);
 
-    @Mapping(target = "sets", ignore = true)
-    @Mapping(target = "points", ignore = true)
-    @Mapping(target = "games", ignore = true)
+    @Mapping(target = "playerName", source = "name")
     PlayerMatchDto playerToPlayerMatchDto(Player player);
+
     Player playerDtoToPlayer(PlayerDto playerDto);
 }

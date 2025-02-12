@@ -21,8 +21,8 @@ class OngoingMatchesServiceTest {
                 .playerTwo(PlayerMapper.INSTANCE.playerToPlayerMatchDto(playerTwo))
                 .build();
 
-        assertEquals("PlayerOne", matchDto.getPlayerOne().getName());
-        assertEquals("PlayerTwo", matchDto.getPlayerTwo().getName());
+        assertEquals("PlayerOne", matchDto.getPlayerOne().getPlayerName());
+        assertEquals("PlayerTwo", matchDto.getPlayerTwo().getPlayerName());
         assertEquals(1L, matchDto.getPlayerOne().getId());
         assertEquals(2L, matchDto.getPlayerTwo().getId());
         assertEquals(0, matchDto.getPlayerOne().getGames());

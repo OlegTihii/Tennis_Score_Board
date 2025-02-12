@@ -16,7 +16,6 @@ public abstract class BaseRepository<E, K> implements CrudRepository<E, K> {
     protected final SessionFactory sessionFactory = HibernateSessionFactory.getSession().getSessionFactory();
 
     @Override
-
     public List<E> findAll() {
         try (Session session = sessionFactory.openSession()) {
             String jpql = "SELECT e FROM " + clazz.getName() + " e";

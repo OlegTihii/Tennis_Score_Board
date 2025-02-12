@@ -12,9 +12,9 @@ import lombok.*;
 @ToString
 public class PlayerMatchDto {
     private Long id;
-    private String name;
+    private String playerName;
 
-    private int sets;
+    private int sets; //todo почему если хардкодить счет, то он не появляется?
     private int games;
     private int points;
 

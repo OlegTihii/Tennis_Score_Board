@@ -4,10 +4,11 @@ import lombok.*;
 
 @Getter
 @Setter
-@Builder
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
+@ToString
 public class PlayerDto {
     private String name;
 }

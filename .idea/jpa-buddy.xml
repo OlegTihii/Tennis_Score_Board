@@ -3,5 +3,7 @@
   <component name="JpaBuddyIdeaProjectConfig">
     <option name="defaultUnitInitialized" value="true" />
     <option name="renamerInitialized" value="true" />
+    <option name="updateChangeLogPath" value="" />
+    <option name="updateDbConnectionName" value="74cf9021-9245-4e1d-8871-32eea6c98fca" />
   </component>
 </project>

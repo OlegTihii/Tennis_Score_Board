@@ -69,4 +69,11 @@
                 columnDataType="BIGINT"/>
     </changeSet>
 
+    <changeSet id="2025-02-06-add-auto-increment-for-match" author="OlegTihii">
+        <addAutoIncrement
+                tableName="MATCHES"
+                columnName="ID"
+                columnDataType="BIGINT"/>
+    </changeSet>
+
 </databaseChangeLog>

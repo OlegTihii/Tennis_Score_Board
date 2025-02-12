@@ -2,11 +2,13 @@ package com.example.tennisscoreboard.dto;
 
 import lombok.*;
 
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Builder
+@ToString
 public class MatchDto {
 
     private PlayerMatchDto playerOne;
