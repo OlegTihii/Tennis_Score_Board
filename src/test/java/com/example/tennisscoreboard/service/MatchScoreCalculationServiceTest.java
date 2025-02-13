@@ -64,8 +64,62 @@ class MatchScoreCalculationServiceTest {
         assertEquals(0, playerOne.getPoints());
         assertEquals(0, playerTwo.getPoints());
 
+        assertEquals(7, playerOne.getGames());
+        assertEquals(6, playerTwo.getGames());
+        assertEquals(0, playerOne.getSets());
+    }
+
+    @Test
+    void givenSixSixInGames_whenPlayerOneScores_thenTiebreakStarts_2() {
+        playerOne.setGames(7);
+        playerTwo.setGames(6);
+
+        playerOne.setPoints(5);
+        playerTwo.setPoints(4);
+
+        matchScoreCalculationService.updateScore(matchDto, playerOne.getId());
+
+        assertEquals(0, playerOne.getPoints());
+        assertEquals(0, playerTwo.getPoints());
+
         assertEquals(0, playerOne.getGames());
         assertEquals(0, playerTwo.getGames());
         assertEquals(1, playerOne.getSets());
+    }
+
+    @Test
+    void givenSixSixInGames_whenPlayerOneScores_thenTiebreakStarts_3() {
+        playerOne.setGames(5);
+        playerTwo.setGames(5);
+
+        playerOne.setPoints(5);
+        playerTwo.setPoints(4);
+
+        matchScoreCalculationService.updateScore(matchDto, playerOne.getId());
+
+        assertEquals(0, playerOne.getPoints());
+        assertEquals(0, playerTwo.getPoints());
+
+        assertEquals(6, playerOne.getGames());
+        assertEquals(5, playerTwo.getGames());
+        assertEquals(0, playerOne.getSets());
+    }
+
+    @Test
+    void givenSixSixInGames_whenPlayerOneScores_thenTiebreakStarts_4() {
+        playerOne.setGames(6);
+        playerTwo.setGames(6);
+
+        playerOne.setPoints(1);
+        playerTwo.setPoints(0);
+
+        matchScoreCalculationService.updateScore(matchDto, playerOne.getId());
+
+        assertEquals(2, playerOne.getPoints());
+        assertEquals(0, playerTwo.getPoints());
+
+        assertEquals(6, playerOne.getGames());
+        assertEquals(6, playerTwo.getGames());
+        assertEquals(0, playerOne.getSets());
     }
 }

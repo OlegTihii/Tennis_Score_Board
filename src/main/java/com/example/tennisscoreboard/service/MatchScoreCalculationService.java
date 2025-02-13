@@ -51,11 +51,18 @@ public class MatchScoreCalculationService {
     }
 
     private boolean isTiebreakSituation(PlayerMatchDto pointWinner, PlayerMatchDto looser) {
-        return pointWinner.getGames() == 6 && looser.getGames() == 6;
+        return pointWinner.getGames() >= 5 && pointWinner.getGames() - looser.getGames() <= 1;
     }
 
     private void tiebreakSituation(PlayerMatchDto pointWinner, PlayerMatchDto looser) {
-        if (pointWinner.getPoints() >= 6 && pointWinner.getPoints() - looser.getPoints() > 1) {
+        if(pointWinner.getPoints() <= 3 && looser.getPoints() <= 3){
+            return;
+        }
+        if(pointWinner.getPoints() - looser.getPoints() > 1){
+            pointWinner.wonGame();
+            clearPoints(pointWinner, looser);
+        }
+        if (pointWinner.getGames() >= 6 && pointWinner.getGames() - looser.getGames() > 1) {
             pointWinner.wonSet();
             clearPoints(pointWinner, looser);
             clearGames(pointWinner, looser);
