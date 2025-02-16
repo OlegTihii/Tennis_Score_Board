@@ -7,7 +7,7 @@ import com.example.tennisscoreboard.repository.PlayerRepository;
 
 public class PlayerPersistenceService {
 
-    private final PlayerRepository playerRepository = new PlayerRepository();
+    private PlayerRepository playerRepository = new PlayerRepository();
 
     public Player findOrSave(PlayerDto playerDto) {
 
@@ -15,5 +15,9 @@ public class PlayerPersistenceService {
 
         return playerRepository.findByName(playerDto.getName())
                 .orElseGet(() -> playerRepository.save(PlayerMapper.INSTANCE.playerDtoToPlayer(playerDto)));
+    }
+
+    public void setPlayerRepository(PlayerRepository playerRepository) {
+        this.playerRepository = playerRepository;
     }
 }
