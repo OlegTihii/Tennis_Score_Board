@@ -14,13 +14,10 @@ import static org.mockito.Mockito.when;
 
 class PlayerPersistenceServiceTest {
 
-    private PlayerPersistenceService playerPersistenceService;
-    private PlayerRepository playerRepository;
-
     @Test
-    void testFindOrSave_PlayerExist() throws Exception {
-        playerPersistenceService = new PlayerPersistenceService();
-        playerRepository = mock(PlayerRepository.class);
+    void testFindOrSave_PlayerExist() {
+        PlayerPersistenceService playerPersistenceService = new PlayerPersistenceService();
+        PlayerRepository playerRepository = mock(PlayerRepository.class);
         playerPersistenceService.setPlayerRepository(playerRepository);
 
         PlayerDto newPlayerForDb = new PlayerDto("Igor");
