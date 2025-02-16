@@ -10,7 +10,6 @@ public class PlayerPersistenceService {
     private final PlayerRepository playerRepository = new PlayerRepository();
 
     public Player findOrSave(PlayerDto playerDto) {
-        //todo add logging
 
         System.out.println("PlayerMapper.INSTANCE.playerDtoToPlayer(playerDto):" + PlayerMapper.INSTANCE.playerDtoToPlayer(playerDto));
 
