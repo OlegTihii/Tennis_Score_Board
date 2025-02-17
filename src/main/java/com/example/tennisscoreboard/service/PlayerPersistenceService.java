@@ -9,8 +9,6 @@ public class PlayerPersistenceService {
 
     private PlayerRepository playerRepository;
 
-    public PlayerPersistenceService() {
-    }
 
     public Player findOrSave(PlayerDto playerDto) {
 
