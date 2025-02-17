@@ -17,7 +17,6 @@ class FinishedMatchesPersistenceServiceTest {
         finishedMatchesPersistenceService.setMatchRepository(matchRepositoryMock);
 
         MatchDto matchDto = new MatchDto();
-
         Match match = new Match();
 
         //when(MatchMapper.INSTANCE.matchDtoToMatch(any())).thenReturn(match);

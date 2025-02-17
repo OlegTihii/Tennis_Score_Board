@@ -17,13 +17,11 @@ public class FinishedMatchesPersistenceService {
 
 
     public void save(MatchDto matchDto) {
-        setMatchRepository(new MatchRepository());
         Match save = matchRepository.save(MatchMapper.INSTANCE.matchDtoToMatch(matchDto));
         System.out.println("Match: " + save);
     }
 
     public List<MatchWinnerDto> findAll(int pageNumber) {
-        setMatchRepository(new MatchRepository());
         List<Match> all = matchRepository.findAll(pageSize, pageNumber);
         return all.stream()
                 .map(MatchMapper.INSTANCE::matchToMatchWinnerDto)
@@ -32,7 +30,6 @@ public class FinishedMatchesPersistenceService {
 
 
     public List<MatchWinnerDto> findAllMatchByPlayerName(String filterByPlayerName, int pageNumber) {
-        setMatchRepository(new MatchRepository());
         List<Match> allByPlayerName = matchRepository.findAllMatchByFilter(filterByPlayerName, pageSize, pageNumber);
         return allByPlayerName.stream()
                 .map(MatchMapper.INSTANCE::matchToMatchWinnerDto)
