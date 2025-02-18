@@ -7,7 +7,11 @@ import com.example.tennisscoreboard.repository.PlayerRepository;
 
 public class PlayerPersistenceService {
 
-    private final PlayerRepository playerRepository = new PlayerRepository();
+    private final PlayerRepository playerRepository;
+
+    public PlayerPersistenceService(PlayerRepository playerRepository) {
+        this.playerRepository = playerRepository;
+    }
 
     public Player findOrSave(PlayerDto playerDto) {
 

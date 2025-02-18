@@ -5,7 +5,6 @@ import com.example.tennisscoreboard.entity.Player;
 import com.example.tennisscoreboard.repository.PlayerRepository;
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Field;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -15,17 +14,12 @@ import static org.mockito.Mockito.when;
 
 class PlayerPersistenceServiceTest {
 
-    private void setPrivateField(Object target, Object value) throws Exception {
-        Field field = target.getClass().getDeclaredField("playerRepository");
-        field.setAccessible(true);
-        field.set(target, value);
-    }
 
     @Test
-    void testFindOrSave_PlayerExist() throws Exception {
-        PlayerPersistenceService playerPersistenceService = new PlayerPersistenceService();
+    void testFindOrSave_PlayerExist() {
         PlayerRepository playerRepository = mock(PlayerRepository.class);
-        setPrivateField(playerPersistenceService, playerRepository);
+        PlayerPersistenceService playerPersistenceService = new PlayerPersistenceService(playerRepository);
+
 
         PlayerDto newPlayerForDb = new PlayerDto("Igor");
         Player existingPlayer = new Player(1L, "Igor");

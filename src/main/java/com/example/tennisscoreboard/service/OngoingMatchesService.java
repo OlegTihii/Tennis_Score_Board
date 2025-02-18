@@ -12,8 +12,13 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class OngoingMatchesService {
     private static final Map<UUID, MatchDto> allGoingMatches = new ConcurrentHashMap<>();
-    private final PlayerPersistenceService playerPersistenceService = new PlayerPersistenceService();
-    private final FinishedMatchesPersistenceService finishedMatchesPersistenceService = new FinishedMatchesPersistenceService();
+    private final PlayerPersistenceService playerPersistenceService;
+    private final FinishedMatchesPersistenceService finishedMatchesPersistenceService;
+
+    public OngoingMatchesService(PlayerPersistenceService playerPersistenceService, FinishedMatchesPersistenceService finishedMatchesPersistenceService) {
+        this.playerPersistenceService = playerPersistenceService;
+        this.finishedMatchesPersistenceService = finishedMatchesPersistenceService;
+    }
 
     public MatchDto findById(UUID uuid) {
         return allGoingMatches.get(uuid);
@@ -55,6 +60,7 @@ public class OngoingMatchesService {
         }
         return false;
     }
+
     private void removeFromGoingMatches(UUID uuid) {
         allGoingMatches.remove(uuid);
     }
