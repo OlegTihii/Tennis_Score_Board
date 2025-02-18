@@ -15,11 +15,11 @@ public class MatchRepository extends BaseRepository<Match, Long> {
 
     public List<Match> findAll(int pageSize, int pageNumber) {
         try (Session session = sessionFactory.openSession()) {
-                Query<Match> findAllMatch = session.createQuery("SELECT m FROM Match m", Match.class);
-                findAllMatch.setFirstResult((pageNumber - 1) * pageSize);
-                findAllMatch.setMaxResults(pageSize);
+            Query<Match> findAllMatch = session.createQuery("SELECT m FROM Match m", Match.class);
+            findAllMatch.setFirstResult((pageNumber - 1) * pageSize);
+            findAllMatch.setMaxResults(pageSize);
 
-                return findAllMatch.list();
+            return findAllMatch.list();
         }
     }
 

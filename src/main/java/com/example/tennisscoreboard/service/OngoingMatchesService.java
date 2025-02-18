@@ -5,6 +5,7 @@ import com.example.tennisscoreboard.dto.PlayerDto;
 import com.example.tennisscoreboard.entity.Player;
 import com.example.tennisscoreboard.exception.MatchAlreadyInProgressException;
 import com.example.tennisscoreboard.mapper.PlayerMapper;
+import com.example.tennisscoreboard.repository.PlayerRepository;
 
 import java.util.Map;
 import java.util.UUID;
@@ -27,6 +28,9 @@ public class OngoingMatchesService {
     public UUID createMatch(PlayerDto playerOneDto, PlayerDto playerTwoDto) {
         // Проверка есть ли игроки в бд и добавление
         // Проверка играет ли новый добавленный игрок матч. Один и тот же игрок не может играть 2 матча одновременно
+
+        playerPersistenceService.setPlayerRepository(new PlayerRepository());
+
         Player playerOne = playerPersistenceService.findOrSave(playerOneDto);
         Player playerTwo = playerPersistenceService.findOrSave(playerTwoDto);
 
