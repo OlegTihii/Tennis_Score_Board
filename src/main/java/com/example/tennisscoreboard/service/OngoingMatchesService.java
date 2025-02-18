@@ -5,7 +5,6 @@ import com.example.tennisscoreboard.dto.PlayerDto;
 import com.example.tennisscoreboard.entity.Player;
 import com.example.tennisscoreboard.exception.MatchAlreadyInProgressException;
 import com.example.tennisscoreboard.mapper.PlayerMapper;
-import com.example.tennisscoreboard.repository.PlayerRepository;
 
 import java.util.Map;
 import java.util.UUID;
@@ -13,8 +12,13 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class OngoingMatchesService {
     private static final Map<UUID, MatchDto> allGoingMatches = new ConcurrentHashMap<>();
-    private final PlayerPersistenceService playerPersistenceService = new PlayerPersistenceService();
-    private final FinishedMatchesPersistenceService finishedMatchesPersistenceService = new FinishedMatchesPersistenceService();
+    private final PlayerPersistenceService playerPersistenceService;
+    private final FinishedMatchesPersistenceService finishedMatchesPersistenceService;
+
+    public OngoingMatchesService(PlayerPersistenceService playerPersistenceService, FinishedMatchesPersistenceService finishedMatchesPersistenceService) {
+        this.playerPersistenceService = playerPersistenceService;
+        this.finishedMatchesPersistenceService = finishedMatchesPersistenceService;
+    }
 
     public MatchDto findById(UUID uuid) {
         return allGoingMatches.get(uuid);
@@ -24,7 +28,7 @@ public class OngoingMatchesService {
         // Проверка есть ли игроки в бд и добавление
         // Проверка играет ли новый добавленный игрок матч. Один и тот же игрок не может играть 2 матча одновременно
 
-        playerPersistenceService.setPlayerRepository(new PlayerRepository());
+        //  playerPersistenceService.setPlayerRepository(new PlayerRepository());
 
         Player playerOne = playerPersistenceService.findOrSave(playerOneDto);
         Player playerTwo = playerPersistenceService.findOrSave(playerTwoDto);

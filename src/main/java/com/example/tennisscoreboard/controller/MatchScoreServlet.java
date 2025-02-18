@@ -2,8 +2,12 @@ package com.example.tennisscoreboard.controller;
 
 import com.example.tennisscoreboard.dto.MatchDto;
 import com.example.tennisscoreboard.mapper.MatchMapper;
+import com.example.tennisscoreboard.repository.MatchRepository;
+import com.example.tennisscoreboard.repository.PlayerRepository;
+import com.example.tennisscoreboard.service.FinishedMatchesPersistenceService;
 import com.example.tennisscoreboard.service.MatchScoreCalculationService;
 import com.example.tennisscoreboard.service.OngoingMatchesService;
+import com.example.tennisscoreboard.service.PlayerPersistenceService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -16,8 +20,14 @@ import java.util.UUID;
 @WebServlet(name = "MatchScoreServlet", urlPatterns = "/match-score")
 public class MatchScoreServlet extends HttpServlet {
 
-    OngoingMatchesService ongoingMatchesService = new OngoingMatchesService();
-    MatchScoreCalculationService matchScoreCalculationService = new MatchScoreCalculationService();
+    private final OngoingMatchesService ongoingMatchesService;
+    private final MatchScoreCalculationService matchScoreCalculationService;
+
+    public MatchScoreServlet() {
+        this.ongoingMatchesService = new OngoingMatchesService(new PlayerPersistenceService(new PlayerRepository()),
+                new FinishedMatchesPersistenceService(new MatchRepository()));
+        this.matchScoreCalculationService = new MatchScoreCalculationService();
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

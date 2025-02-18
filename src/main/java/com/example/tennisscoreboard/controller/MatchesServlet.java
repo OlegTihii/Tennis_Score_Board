@@ -1,6 +1,7 @@
 package com.example.tennisscoreboard.controller;
 
 import com.example.tennisscoreboard.dto.MatchWinnerDto;
+import com.example.tennisscoreboard.repository.MatchRepository;
 import com.example.tennisscoreboard.service.FinishedMatchesPersistenceService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -14,7 +15,11 @@ import java.util.List;
 @WebServlet(name = "MatchServlets", urlPatterns = "/matches")
 public class MatchesServlet extends HttpServlet {
 
-    private final FinishedMatchesPersistenceService finishedMatchesPersistenceService = new FinishedMatchesPersistenceService();
+    private final FinishedMatchesPersistenceService finishedMatchesPersistenceService;
+
+    public MatchesServlet() {
+        this.finishedMatchesPersistenceService = new FinishedMatchesPersistenceService(new MatchRepository());
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

@@ -10,11 +10,12 @@ import java.util.List;
 
 public class FinishedMatchesPersistenceService {
 
-    //todo pageSize нарушает принцип единство ответственности
     private final int pageSize = 5;
-    private MatchRepository matchRepository;
+    private final MatchRepository matchRepository;
 
-
+    public FinishedMatchesPersistenceService(MatchRepository matchRepository) {
+        this.matchRepository = matchRepository;
+    }
 
     public void save(MatchDto matchDto) {
         Match save = matchRepository.save(MatchMapper.INSTANCE.matchDtoToMatch(matchDto));
@@ -34,9 +35,5 @@ public class FinishedMatchesPersistenceService {
         return allByPlayerName.stream()
                 .map(MatchMapper.INSTANCE::matchToMatchWinnerDto)
                 .toList();
-    }
-
-    public void setMatchRepository(MatchRepository matchRepository) {
-        this.matchRepository = matchRepository;
     }
 }
